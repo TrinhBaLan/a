@@ -59,6 +59,14 @@ public class Server extends Thread {
                     
                     System.out.println("Connection established with a client, IP: " + acceptedSocket.getInetAddress() + ", port: " + acceptedSocket.getPort());
                     if (serverConnection.size() == number_of_connect) {
+                    	System.out.print("Type file name you want to upload: ");
+                        try {
+                            fileName = cmdReader.readLine(); // doc ten file de chuan bi truyen file sang client
+                        } catch (IOException ex) {
+                            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        System.out.println(fileName);
+                        serverConnection.get(0).getConnection().serverSendFile();;
                         break;
                     }
                     System.out.println("waiting for client ");
@@ -67,13 +75,13 @@ public class Server extends Thread {
                     continue;
                 }
             }
-            System.out.print("Type file name you want to upload: ");
-            try {
-                fileName = cmdReader.readLine(); // doc ten file de chuan bi truyen file sang client
-            } catch (IOException ex) {
-                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.out.println(fileName);
+//            System.out.print("Type file name you want to upload: ");
+//            try {
+//                fileName = cmdReader.readLine(); // doc ten file de chuan bi truyen file sang client
+//            } catch (IOException ex) {
+//                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            System.out.println(fileName);
         }
 
     }
